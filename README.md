@@ -5,8 +5,18 @@
 [![GitHub stars](https://img.shields.io/github/stars/peplxx/probability-explorer.svg)](https://github.com/peplxx/probability-explorer/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/peplxx/probability-explorer.svg)](https://github.com/peplxx/probability-explorer/issues)
 
+> Observe [multivariative normal distribution](https://en.wikipedia.org/wiki/Multivariate_normal_distribution) plot
 ![image](https://github.com/user-attachments/assets/ecc61f1d-7cf8-4b89-a1b4-95e6b57f8fe5)
+
+> Observe [Multinomial distribution](https://en.wikipedia.org/wiki/Multinomial_distribution) plot
 ![image](https://github.com/user-attachments/assets/bc4487dd-a9a6-4938-901e-c5d8702e9ee0)
+
+>Simulate [random walks](https://en.wikipedia.org/wiki/Random_walk) and observe their statistical properties
+![image](https://github.com/user-attachments/assets/ba96399e-e09a-4e9e-9fdf-1520c9c6de2b)
+
+> Estimate π using [Monte Carlo method](https://en.wikipedia.org/wiki/Monte_Carlo_method)
+![image](https://github.com/user-attachments/assets/1f558bb3-321b-42d2-be85-656aafe6eb19)
+
 An interactive web application for exploring and visualizing probability distributions. This tool helps users understand both continuous and discrete probability distributions through interactive plots, mathematical formulas, and key properties.
 
 ## Features
