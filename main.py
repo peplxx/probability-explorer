@@ -5,20 +5,56 @@ import scipy.special
 import math
 from scipy.stats import multivariate_normal, chi2
 
+st.set_page_config(
+    page_title="Probability Explorer",
+    page_icon="📊",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 class ProbabilityExplorer:
     def __init__(self):
         st.title("Probability Explorer")
-        self.left_col, self.right_col = st.columns([1, 2])
+        self.formula_col, self.plot_col, self.properties_col = st.columns([1, 1, 1])  # Three equal columns
         self.confidence = 0.95
         self.setup_ui()
 
     def setup_ui(self):
-        with self.left_col:
-            self.dist_type = st.selectbox(
-                'Select probability distribution',
-                ['Multivariate Normal', 'Normal', 'Chi-squared', 'Poisson', 'Uniform', 'Binomial']
+        with st.sidebar:
+            st.header("📊 Navigation")
+            self.page = st.radio(
+                "",
+                ["Continuous Distributions", "Discrete Distributions", "Random Variables"],
+                format_func=lambda x: f"{'📈' if x=='Continuous Distributions' else '📊' if x=='Discrete Distributions' else '🎲'} {x}"
             )
-            st.write(f'Selected distribution: {self.dist_type}')
+            
+            st.markdown("---")
+            
+            if self.page == "Continuous Distributions":
+                st.subheader("📈 Continuous Distributions")
+                self.dist_type = st.selectbox(
+                    'Select distribution type',
+                    ['Multivariate Normal', 'Normal', 'Chi-squared', 'Uniform'],
+                    format_func=lambda x: f"{x} Distribution"
+                )
+            elif self.page == "Discrete Distributions":
+                st.subheader("📊 Discrete Distributions")
+                self.dist_type = st.selectbox(
+                    'Select distribution type',
+                    ['Poisson', 'Binomial'],
+                    format_func=lambda x: f"{x} Distribution"
+                )
+            else:  # Random Variables page
+                st.subheader("🎲 Random Variables")
+                st.write("""
+                Learn about fundamental concepts:
+                - 📊 Expected Value
+                - 📈 Variance
+                - 📉 Standard Deviation
+                - ∑ Moment Generating Functions
+                """)
+                return
+            
             self.get_distribution_parameters()
             self.auto_update = st.checkbox('Auto-update plot', value=True)
 
@@ -83,7 +119,7 @@ class ProbabilityExplorer:
         st.latex(formulas[self.dist_type])
 
     def plot_distribution(self):
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots()  # Control figure size here
         
         if self.dist_type == 'Multivariate Normal':
             self.plot_multivariate_normal(ax)
@@ -143,20 +179,63 @@ class ProbabilityExplorer:
         ax.set_ylabel('Probability Density')
 
     def calculate_and_plot(self):
-        with self.right_col:
-            st.write('Calculating probability distribution...')
-            self.display_formula()
-            fig = self.plot_distribution()
-            st.pyplot(fig)
-            st.success(icon="🔥", body="Distribution calculated!")
+        if self.page == "Random Variables":
+            with self.formula_col:
+                st.write("## Mathematical Definitions")
+                st.latex(r"E[X] = \sum_{x} x \cdot P(X=x)")
+                st.latex(r"Var(X) = E[(X - \mu)^2]")
+                st.latex(r"\sigma = \sqrt{Var(X)}")
+                st.latex(r"M_X(t) = E[e^{tX}]")
+            
+            with self.plot_col:
+                st.write("## Visual Representation")
+                st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/The_Normal_Distribution.svg/1200px-The_Normal_Distribution.svg.png")
+            
+            with self.properties_col:
+                st.write("""
+                ## Key Properties
+                - Expected value is the center of mass
+                - Variance measures spread from mean
+                - Standard deviation is in same units as data
+                - MGF uniquely determines distribution
+                """)
+        else:
+            with self.formula_col:
+                st.write('Distribution Formula:')
+                self.display_formula()
+                st.write('Key Parameters:')
+                if self.dist_type == 'Normal':
+                    st.write(f'μ = {self.mean}, σ = {self.std}')
+                elif self.dist_type == 'Multivariate Normal':
+                    st.write(f'Mean vector: μ = [{self.mean1}, {self.mean2}]')
+                    st.write('Covariance matrix:')
+                    st.write(self.cov_matrix)
+            
+            with self.plot_col:
+                st.write('Distribution Plot:')
+                fig = self.plot_distribution()
+                st.pyplot(fig)
+                st.success(icon="🔥", body="Distribution calculated!")
+
+            with self.properties_col:
+                st.write('Properties:')
+                if self.dist_type == 'Normal':
+                    st.write("""
+                    - Symmetric about mean
+                    - 68-95-99.7 rule applies
+                    - Bell-shaped curve
+                    - Infinite support
+                    """)
 
     def run(self):
-        if self.auto_update:
+        if self.page != "Random Variables" and self.auto_update:
             self.calculate_and_plot()
-        else:
-            with self.left_col:
+        elif self.page != "Random Variables":
+            with self.formula_col:
                 if st.button('Calculate Distribution'):
                     self.calculate_and_plot()
+        else:
+            self.calculate_and_plot()
 
 # Initialize and run the app
 app = ProbabilityExplorer()
