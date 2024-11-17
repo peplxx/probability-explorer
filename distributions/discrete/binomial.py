@@ -19,11 +19,34 @@ class BinomialDistribution(Distribution):
     def get_formula(self):
         return r'P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}'
 
-    def get_properties(self):
-        return """
-        - Models number of successes in n independent trials
-        - Each trial has probability p of success
-        - Mean = np
-        - Variance = np(1-p)
-        - Support is k ∈ {0,1,...,n}
-        """
+    def get_properties(self, st):
+        st.write("""
+        The **Binomial Distribution** models the number of successes in a fixed number of independent trials.
+        It is characterized by two parameters:
+        - **n (number of trials)**: total number of independent experiments
+        - **p (probability of success)**: probability of success on each trial
+        
+        Key Properties:
+        - **Support**: k ∈ {0,1,...,n}
+        - **Mean**: np
+        - **Variance**: np(1-p)
+        - **Independent trials** (no memory between trials)
+        - **Fixed probability** of success for each trial
+        
+        The probability mass function (PMF) is given by:
+        """)
+        
+        st.latex(r'P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}')
+        
+        st.write("""
+        Common applications:
+        - **Quality control** (number of defective items)
+        - **Clinical trials** (number of successful treatments)
+        - **Polling and surveys** (number of positive responses)
+        - **Genetics** (inheritance patterns)
+        
+        Important links:
+        - [**Properties**](https://en.wikipedia.org/wiki/Binomial_distribution#Properties)
+        - [**Applications**](https://en.wikipedia.org/wiki/Binomial_distribution#Applications)
+        - [**Relationship to other distributions**](https://en.wikipedia.org/wiki/Binomial_distribution#Related_distributions)
+        """)

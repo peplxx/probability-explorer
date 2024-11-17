@@ -37,11 +37,40 @@ class MultivariateNormalDistribution(Distribution):
     def get_formula(self):
         return r'f(x) = \frac{1}{2\pi|\Sigma|^{1/2}} \exp\left(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right)'
 
-    def get_properties(self):
-        return """
-        - Generalizes univariate normal to multiple dimensions
-        - Characterized by mean vector and covariance matrix
-        - Elliptical contours of constant density
-        - Marginal and conditional distributions are normal
-        - Linear combinations are normally distributed
-        """
+    def get_properties(self, st):
+        st.write("""
+        The **Multivariate Normal Distribution** is a generalization of the univariate normal distribution to multiple dimensions.
+        It is characterized by two parameters:
+        - **μ (mean vector)**: determines the center of the distribution
+        - **Σ (covariance matrix)**: determines the shape, spread and orientation of the distribution
+        
+        Key Properties:
+        - **Generalizes univariate normal to multiple dimensions**
+        - **Characterized by mean vector and covariance matrix**
+        - **Elliptical contours of constant density**
+        - **Marginal and conditional distributions are normal**
+        - **Linear combinations are normally distributed**
+        
+        The probability density function (PDF) is given by:
+        """)
+        
+        st.latex(r'f(x) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}} \exp\left(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right)')
+        
+        st.write("""
+        where:
+        - **x** is an n-dimensional vector
+        - **μ** is the mean vector
+        - **Σ** is the covariance matrix
+        - **|Σ|** is the determinant of Σ
+        
+        The cumulative distribution function (CDF) does not have a closed form for n>1, but can be expressed as:
+        """)
+        
+        st.latex(r'F(x) = \int_{-\infty}^{x_1}\cdots\int_{-\infty}^{x_n} f(t_1,\ldots,t_n)dt_1\cdots dt_n')
+        
+        st.write("""
+        Important links:
+        - [**Maximum Likelihood Estimation**](https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Maximum_likelihood_estimation)
+        - [**Properties**](https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Properties)
+        - [**Applications**](https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Applications)
+        """)

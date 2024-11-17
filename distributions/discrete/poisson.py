@@ -18,11 +18,33 @@ class PoissonDistribution(Distribution):
     def get_formula(self):
         return r'P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}'
 
-    def get_properties(self):
-        return """
-        - Models number of events in fixed time/space interval
-        - Events occur independently at constant rate
-        - Mean = Variance = λ 
-        - Support is k ∈ {0,1,2,...}
-        - Limit of binomial as n→∞, p→0 with np=λ
-        """
+    def get_properties(self, st):
+        st.write("""
+        The **Poisson Distribution** models the number of events occurring in a fixed interval of time or space.
+        It is characterized by one parameter:
+        - **λ (rate parameter)**: average number of events in the interval
+        
+        Key Properties:
+        - **Support**: k ∈ {0,1,2,...}
+        - **Mean = λ**
+        - **Variance = λ**
+        - **Events occur independently** at a constant rate
+        - **No memory** between events
+        
+        The probability mass function (PMF) is given by:
+        """)
+        
+        st.latex(r'P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}')
+        
+        st.write("""
+        Common applications:
+        - **Customer arrivals** at a service point
+        - **Defects** in manufacturing
+        - **Radioactive decay** events
+        - **Network traffic** analysis
+        
+        Important links:
+        - [**Properties**](https://en.wikipedia.org/wiki/Poisson_distribution#Properties)
+        - [**Applications**](https://en.wikipedia.org/wiki/Poisson_distribution#Applications)
+        - [**Relationship to other distributions**](https://en.wikipedia.org/wiki/Poisson_distribution#Related_distributions)
+        """)

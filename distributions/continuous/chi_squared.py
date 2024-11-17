@@ -18,11 +18,32 @@ class ChiSquaredDistribution(Distribution):
     def get_formula(self):
         return r'f(x) = \frac{1}{2^{k/2}\Gamma(k/2)}x^{k/2-1}e^{-x/2}'
 
-    def get_properties(self):
-        return """
-        - Support is x > 0 
-        - Mean equals degrees of freedom (k)
-        - Variance equals 2k
-        - Right-skewed distribution
-        - Sum of k squared standard normal variables
-        """
+    def get_properties(self, st):
+        st.write("""
+        The **Chi-squared distribution** is a continuous probability distribution that is commonly used in statistical inference.
+        It is characterized by one parameter:
+        - **k (degrees of freedom)**: determines the shape of the distribution
+        
+        Key Properties:
+        - **Support is x > 0** (non-negative values only)
+        - **Mean equals degrees of freedom (k)**
+        - **Variance equals 2k**
+        - **Right-skewed distribution**
+        - **Sum of k squared standard normal variables**
+        
+        The probability density function (PDF) is given by:
+        """)
+        
+        st.latex(r'f(x) = \frac{1}{2^{k/2}\Gamma(k/2)}x^{k/2-1}e^{-x/2}')
+        
+        st.write("""
+        Common applications include:
+        - **Goodness-of-fit tests**
+        - **Testing independence in contingency tables**
+        - **Confidence intervals for population variance**
+        - **Component in other distributions** (e.g., F-distribution)
+        
+        Important links:
+        - [**Properties**](https://en.wikipedia.org/wiki/Chi-square_distribution#Properties)
+        - [**Applications**](https://en.wikipedia.org/wiki/Chi-square_distribution#Applications)
+        """)

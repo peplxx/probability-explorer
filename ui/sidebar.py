@@ -4,7 +4,7 @@ class Sidebar:
     @staticmethod
     def setup():
         with st.sidebar:
-            st.header("📊 Navigation")
+            st.header("🧭 Navigation")
             page = st.radio(
                 "",
                 ["Continuous Distributions", "Discrete Distributions", "Random Variables"],
@@ -19,12 +19,12 @@ class Sidebar:
         if distribution_type == "Continuous":
             return st.selectbox(
                 'Select distribution type',
-                ['Multivariate Normal', 'Normal', 'Chi-squared', 'Uniform'],
+                ['Multivariate Normal', 'Normal', 'Chi-squared','Exponential', 'Uniform'],
                 format_func=lambda x: f"{x} Distribution"
             )
         else:
             return st.selectbox(
                 'Select distribution type',
-                ['Multinomial', 'Poisson', 'Binomial'],
+                ['Multinomial', 'Poisson', 'Binomial', 'Geometric'],
                 format_func=lambda x: f"{x} Distribution"
             )

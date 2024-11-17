@@ -21,11 +21,41 @@ class UniformDistribution(Distribution):
     def get_formula(self):
         return r'f(x) = \frac{1}{b-a} \text{ for } a \leq x \leq b'
 
-    def get_properties(self):
-        return """
-        - Constant probability density over interval [a,b]
-        - Mean = (a+b)/2
-        - Variance = (b-a)²/12
-        - Maximum entropy continuous distribution for interval [a,b]
-        - All points in interval equally likely
-        """
+    def get_properties(self, st):
+        st.write("""
+        The **Uniform Distribution** is the simplest continuous probability distribution.
+        It is characterized by two parameters:
+        - **a (lower bound)**: minimum value of the interval
+        - **b (upper bound)**: maximum value of the interval
+        
+        Key Properties:
+        - **Constant probability density** of 1/(b-a) over interval [a,b]
+        - **Zero probability density** outside interval [a,b]
+        - **Mean = (a+b)/2**
+        - **Variance = (b-a)²/12**
+        - **Maximum entropy** continuous distribution for a bounded interval
+        - **All points in interval are equally likely**
+        
+        The probability density function (PDF) is given by:
+        """)
+        
+        st.latex(r'f(x) = \begin{cases} \frac{1}{b-a} & \text{for } a \leq x \leq b \\ 0 & \text{otherwise} \end{cases}')
+        
+        st.write("""
+        The cumulative distribution function (CDF) is:
+        """)
+        
+        st.latex(r'F(x) = \begin{cases} 0 & \text{for } x < a \\ \frac{x-a}{b-a} & \text{for } a \leq x \leq b \\ 1 & \text{for } x > b \end{cases}')
+        
+        st.write("""
+        Common applications:
+        - **Random number generation**
+        - **Prior distribution in Bayesian inference**
+        - **Modeling random errors**
+        - **Simple random sampling**
+        
+        Important links:
+        - [**Properties**](https://en.wikipedia.org/wiki/Continuous_uniform_distribution#Properties)
+        - [**Applications**](https://en.wikipedia.org/wiki/Continuous_uniform_distribution#Applications)
+        - [**Relationship to other distributions**](https://en.wikipedia.org/wiki/Continuous_uniform_distribution#Related_distributions)
+        """)

@@ -18,6 +18,6 @@ class Distribution(ABC):
         pass
     
     @abstractmethod
-    def get_properties(self):
+    def get_properties(self, st):
         """Return distribution properties"""
         pass

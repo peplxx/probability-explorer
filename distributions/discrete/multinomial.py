@@ -47,13 +47,33 @@ class MultinomialDistribution(Distribution):
     def get_formula(self):
         return r'P(X_1=k_1,...,X_m=k_m) = \frac{n!}{k_1!...k_m!}p_1^{k_1}...p_m^{k_m}'
 
-    def get_properties(self):
-        return """
-        - Generalizes binomial to multiple categories
-        - Models counts across m categories in n trials
-        - Each trial results in exactly one category
-        - Category probabilities sum to 1
-        - Mean of category i = np_i
-        - Covariance between i,j = -np_ip_j
-        - Support is k_i ≥ 0 with Σk_i = n
-        """
+    def get_properties(self, st):
+        st.write("""
+        The **Multinomial Distribution** is a generalization of the binomial distribution to multiple categories.
+        It is characterized by two parameters:
+        - **n (number of trials)**: total number of independent experiments
+        - **p₁,...,pₘ (probabilities)**: probability of each category, must sum to 1
+        
+        Key Properties:
+        - **Support**: k₁,...,kₘ ≥ 0 with Σkᵢ = n
+        - **Mean of category i**: npᵢ
+        - **Variance of category i**: npᵢ(1-pᵢ)
+        - **Covariance between categories i,j**: -npᵢpⱼ
+        - **Independent trials** (no memory between trials)
+        
+        The probability mass function (PMF) is given by:
+        """)
+        
+        st.latex(r'P(X_1=k_1,...,X_m=k_m) = \frac{n!}{k_1!...k_m!}p_1^{k_1}...p_m^{k_m}')
+        
+        st.write("""
+        Common applications:
+        - **Genetic studies** (allele frequencies)
+        - **Market research** (consumer preferences)
+        - **Natural language processing** (word frequencies)
+        - **Political science** (voting patterns)
+        
+        Important links:
+        - [**Properties**](https://en.wikipedia.org/wiki/Multinomial_distribution#Properties)
+        - [**Applications**](https://en.wikipedia.org/wiki/Multinomial_distribution#Examples)
+        """)

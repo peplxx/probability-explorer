@@ -23,6 +23,8 @@ class ProbabilityExplorer:
             'Poisson': PoissonDistribution(),
             'Binomial': BinomialDistribution(),
             'Multinomial': MultinomialDistribution(),
+            'Exponential': ExponentialDistribution(),
+            'Geometric': GeometricDistribution(),
         }
         
     def run(self):
@@ -67,8 +69,7 @@ class ProbabilityExplorer:
             st.success(icon="🔥", body="Distribution calculated!")
         
         with self.properties_col:
-            st.write('Properties:')
-            st.write(distribution.get_properties())
+            distribution.get_properties(st)
 
     def show_random_variables_page(self):
         # Implementation of random variables page
