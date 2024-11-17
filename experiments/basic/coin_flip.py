@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from .base import Experiment
+from ..base import Experiment
 import streamlit as st
 
 class CoinFlipExperiment(Experiment):

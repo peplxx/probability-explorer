@@ -1,12 +1,18 @@
 from typing import Dict, Type
 from .base import Experiment
-from .coin_flip import CoinFlipExperiment
+from .basic import *
 import streamlit as st
 
 class ExperimentManager:
     def __init__(self):
         self.experiments: Dict[str, Type[Experiment]] = {
             'Coin Flip': CoinFlipExperiment(),
+            "Dice Roll": DiceExperiment(),
+            "Monte Carlo Pi": MonteCarloExperiment(),
+            "Random Walk": RandomWalkExperiment(),
+            "Central Limit Theorem": CentralLimitExperiment(),
+            "Student's t-test": TTestExperiment(),
+            "Markov Chain": MarkovChainExperiment(),
         }
     
     def get_experiment_names(self):
