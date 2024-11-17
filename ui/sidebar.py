@@ -19,12 +19,12 @@ class Sidebar:
         if distribution_type == "Continuous":
             return st.selectbox(
                 'Select distribution type',
-                ['Multivariate Normal', 'Normal', 'Chi-squared','Exponential', 'Uniform'],
+                ['Multivariate Normal', 'Normal', 'Chi-squared','Exponential', 'Cauchy', 'Uniform', 'Gamma'],
                 format_func=lambda x: f"{x} Distribution"
             )
         elif distribution_type == "Discrete":
             return st.selectbox(
                 'Select distribution type',
-                ['Multinomial', 'Poisson', 'Binomial', 'Geometric', 'Bernoulli'],
+                ['Multinomial', 'Poisson', 'Binomial', 'Geometric', 'Bernoulli', 'Hypergeometric', 'UniformDiscrete'],
                 format_func=lambda x: f"{x} Distribution"
             )

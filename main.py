@@ -11,7 +11,7 @@ class ProbabilityExplorer:
             page_title="Probability Explorer",
             page_icon="🌐",
             layout="wide",
-            initial_sidebar_state="collapsed"
+            initial_sidebar_state="expanded"
         )
         
         st.markdown("""
@@ -44,7 +44,12 @@ class ProbabilityExplorer:
             'Exponential': ExponentialDistribution(),
             'Geometric': GeometricDistribution(),
             'Bernoulli': BernoulliDistribution(),
+            'Cauchy': CauchyDistribution(),
+            'Gamma': GammaDistribution(),
+            'Hypergeometric': HypergeometricDistribution(),
+            'UniformDiscrete': UniformDiscreteDistribution(),
         }
+        
         
     def run(self):
         page = Sidebar.setup()
@@ -68,6 +73,7 @@ class ProbabilityExplorer:
             
             st.markdown("---")
             auto_update = st.checkbox('Auto-update plot', value=True)
+            
         with self.formula_col:
             params = distribution.get_parameters()
         if auto_update or st.sidebar.button('Calculate Distribution'):
@@ -75,6 +81,7 @@ class ProbabilityExplorer:
                 self.display_distribution(distribution, params)
             except RuntimeError as e:
                 st.error("Error plotting distribution: " + str(e))
+                
     def show_experiments_page(self):
         pass
         
@@ -98,13 +105,13 @@ class ProbabilityExplorer:
         Melnikov Sergey | https://github.com/peplxx/probability-explorer
         ```
         """)
+        
     def display_distribution(self, distribution, params):
         with self.formula_col:
             st.write('Distribution Formula:')
             st.latex(distribution.get_formula())
             st.write('Key Parameters:')
             st.write(params)
-        
         with self.plot_col:
             st.write('Distribution Plot:')
             fig, ax = plt.subplots()
@@ -113,7 +120,6 @@ class ProbabilityExplorer:
                 plt.colorbar(plot, label='Probability Density')
             st.pyplot(fig)
             st.success(icon="🔥", body="Distribution calculated!")
-        
         with self.properties_col:
             distribution.get_properties(st)
 
