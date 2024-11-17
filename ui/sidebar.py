@@ -25,6 +25,6 @@ class Sidebar:
         else:
             return st.selectbox(
                 'Select distribution type',
-                ['Multinomial', 'Poisson', 'Binomial', 'Geometric'],
+                ['Multinomial', 'Poisson', 'Binomial', 'Geometric', 'Bernoulli'],
                 format_func=lambda x: f"{x} Distribution"
             )

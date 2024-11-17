@@ -9,11 +9,30 @@ class ProbabilityExplorer:
     def __init__(self):
         st.set_page_config(
             page_title="Probability Explorer",
-            page_icon="📊",
+            page_icon="🌐",
             layout="wide",
             initial_sidebar_state="expanded"
         )
-        st.title("Probability Explorer")
+        
+        # Add custom CSS for better readability
+        st.markdown("""
+            <style>
+            .stMarkdown, .stText, .stNumber {
+                font-size: 18px;
+            }
+            .stTitle {
+                font-size: 42px !important;
+            }
+            .stMarkdown h2 {
+                font-size: 32px;
+            }
+            .sidebar .stMarkdown {
+                font-size: 16px;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+        
+        st.title("🌐 Probability Explorer")
         self.formula_col, self.plot_col, self.properties_col = st.columns([1, 1, 1])
         self.distributions = {
             'Normal': NormalDistribution(),
@@ -25,6 +44,7 @@ class ProbabilityExplorer:
             'Multinomial': MultinomialDistribution(),
             'Exponential': ExponentialDistribution(),
             'Geometric': GeometricDistribution(),
+            'Bernoulli': BernoulliDistribution(),
         }
         
     def run(self):
