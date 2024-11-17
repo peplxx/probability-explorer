@@ -11,10 +11,9 @@ class ProbabilityExplorer:
             page_title="Probability Explorer",
             page_icon="🌐",
             layout="wide",
-            initial_sidebar_state="expanded"
+            initial_sidebar_state="collapsed"
         )
         
-        # Add custom CSS for better readability
         st.markdown("""
             <style>
             .stMarkdown, .stText, .stNumber {
@@ -50,28 +49,55 @@ class ProbabilityExplorer:
     def run(self):
         page = Sidebar.setup()
         
-        if page == "Random Variables":
-            self.show_random_variables_page()
+        if page == "Experiments":
+            self.show_experiments_page()
+            return
+            
+        if page == "About":
+            self.show_about_page()
+            return
+            
+        if page not in ["Continuous Distributions", "Discrete Distributions"]:
             return
             
         with st.sidebar:
             dist_type = Sidebar.get_distribution_selector(
                 "Continuous" if page == "Continuous Distributions" else "Discrete"
             )
-            st.markdown("---")
-            st.write("Distribution Parameters:")
             distribution = self.distributions[dist_type]
-            params = distribution.get_parameters()
             
             st.markdown("---")
             auto_update = st.checkbox('Auto-update plot', value=True)
-        
+        with self.formula_col:
+            params = distribution.get_parameters()
         if auto_update or st.sidebar.button('Calculate Distribution'):
             try:
                 self.display_distribution(distribution, params)
             except RuntimeError as e:
                 st.error("Error plotting distribution: " + str(e))
-    
+    def show_experiments_page(self):
+        pass
+        
+    def show_about_page(self):
+        st.header("About project:")
+        
+        st.markdown("""
+        ```
+        Project Information
+        
+        This is an interactive web application for exploring and visualizing probability distributions.        
+        It provides intuitive interfaces for understanding both continuous and discrete probability distributions through 
+        interactive plots and mathematical formulas.
+        
+        Built with:
+        - Streamlit
+        - NumPy
+        - SciPy
+        - Matplotlib
+        
+        Melnikov Sergey | https://github.com/peplxx/probability-explorer
+        ```
+        """)
     def display_distribution(self, distribution, params):
         with self.formula_col:
             st.write('Distribution Formula:')
@@ -90,10 +116,6 @@ class ProbabilityExplorer:
         
         with self.properties_col:
             distribution.get_properties(st)
-
-    def show_random_variables_page(self):
-        # Implementation of random variables page
-        pass
 
 if __name__ == "__main__":
     app = ProbabilityExplorer()

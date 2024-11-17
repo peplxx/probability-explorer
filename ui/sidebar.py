@@ -7,8 +7,8 @@ class Sidebar:
             st.header("🧭 Navigation")
             page = st.radio(
                 "",
-                ["Continuous Distributions", "Discrete Distributions", "Random Variables"],
-                format_func=lambda x: f"{'📈' if x=='Continuous Distributions' else '📊' if x=='Discrete Distributions' else '🎲'} {x}"
+                ["Continuous Distributions", "Discrete Distributions", "Experiments", "About"],
+                format_func=lambda x: f"{'📈' if x=='Continuous Distributions' else '📊' if x=='Discrete Distributions' else '🎲' if x=='Random Variables' else '🧪' if x=='Experiments' else '👤'} {x}"
             )
             
             st.markdown("---")
@@ -22,7 +22,7 @@ class Sidebar:
                 ['Multivariate Normal', 'Normal', 'Chi-squared','Exponential', 'Uniform'],
                 format_func=lambda x: f"{x} Distribution"
             )
-        else:
+        elif distribution_type == "Discrete":
             return st.selectbox(
                 'Select distribution type',
                 ['Multinomial', 'Poisson', 'Binomial', 'Geometric', 'Bernoulli'],
