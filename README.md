@@ -32,7 +32,7 @@ pip install uv
 3. Install dependencies:
 
 ```bash
-uv install
+uv sync
 ```
 
 4. Run the application:
