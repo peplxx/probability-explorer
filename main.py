@@ -3,6 +3,8 @@ from distributions.continuous import *
 from distributions.discrete import *
 from ui.sidebar import Sidebar
 import matplotlib.pyplot as plt
+import numpy as np
+from experiments.manager import ExperimentManager
 
 
 class ProbabilityExplorer:
@@ -49,6 +51,7 @@ class ProbabilityExplorer:
             'Hypergeometric': HypergeometricDistribution(),
             'UniformDiscrete': UniformDiscreteDistribution(),
         }
+        self.experiment_manager = ExperimentManager()
         
         
     def run(self):
@@ -83,8 +86,14 @@ class ProbabilityExplorer:
                 st.error("Error plotting distribution: " + str(e))
                 
     def show_experiments_page(self):
-        pass
+        with st.sidebar:
+            experiment = st.selectbox(
+                "Choose an experiment:",
+                self.experiment_manager.get_experiment_names()
+            )
         
+        self.experiment_manager.run_experiment(experiment)
+
     def show_about_page(self):
         st.header("About project:")
         
